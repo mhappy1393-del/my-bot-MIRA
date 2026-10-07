@@ -1,10 +1,7 @@
-import threading
-from flask import Flask
-from rubika import Robot
+from rubka import Robot
 
 TOKEN = "CGBJCA0RDCHIMVGATJJMLDRWNTVYFHNOKJUIRHJRDBNQZJCCHWKESMVQRKBLSCUK"
 
-# راه‌اندازی ربات
 bot = Robot(
     token=TOKEN,
     enable_offset=True
@@ -39,23 +36,5 @@ async def handler(bot, message):
             "🛠️ پشتیبانی مستقیم:\n@mohmmahre"
         )
 
-
-# ساخت یک وب‌سرور کوچک برای جلوگیری از خاموش شدن ربات در Render
-app = Flask(name)
-
-@app.route('/')
-def home():
-    return "Bot is running 24/7!"
-
-def run_web():
-    # Render به طور خودکار به پورت اختصاصی نیاز دارد، فلاسْک روی پورت ۸۰۸۰ اجرا می‌شود
-    app.run(host="0.0.0.0", port=8080)
-
-
-if name == "main":
-    # اجرای وب‌سرور در یک بخش پس‌زمینه (Thread)
-    t = threading.Thread(target=run_web)
-    t.start()
-    
-    print("ربات و وب‌سرور روشن شدند ✅")
-    bot.run()
+print("ربات روشن شد ✅")
+bot.run()
